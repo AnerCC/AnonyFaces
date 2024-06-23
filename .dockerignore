@@ -1,0 +1,17 @@
+# Ignore files and directories commonly generated during development
+.git
+.vscode
+*__pycache__
+*.pyc
+
+# Ignore virtual environment directories
+cpu-env
+
+
+# Ignore Docker-specific files and directories
+.dockerignore
+Dockerfile
+
+
+# Ignore any sensitive or unnecessary files
+
