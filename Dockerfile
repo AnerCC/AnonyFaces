@@ -10,7 +10,7 @@ RUN apt-get update && \
     apt-get install -y libgl1-mesa-glx libglib2.0-0 python3-venv && \
     rm -rf /var/lib/apt/lists/*
 
-# Create and set the working directory
+# Set the working directory in the container
 WORKDIR /app
 
 # Create a virtual environment
@@ -30,11 +30,11 @@ COPY . .
 # Set environment variable for LD_LIBRARY_PATH to include the directory with libGL.so.1
 ENV LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
+# Ensure the app script is executable (if necessary)
+RUN chmod +x app/app.py  
+
 # Expose the port that the Flask app will run on
 EXPOSE 5000
 
-# Ensure the app script is executable
-RUN chmod +x app/app.py
-
-# Run the Flask app with Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app.app:app", "--workers", "1", "--threads", "4"]
+# Command to run the Flask app with Gunicorn
+CMD ["/opt/venv/bin/gunicorn", "--bind", "0.0.0.0:5000", "app.app:app", "--workers", "1", "--threads", "4"]
