@@ -31,7 +31,8 @@ def blur_file_bytes():
     np_images=cv.imdecode(np.frombuffer(byte_image, np.uint8), cv.IMREAD_COLOR)
     print(f'finished encoding image in - {time.time()-sed}')
     blurred_image_np= blureFace_bytes_file(np_images,fd_threshold,LOGGER)  # Pass fd_threshold and logger
-    if blurred_image_np.any():
+    
+    if blurred_image_np is not None:
       
       shape=blurred_image_np.shape
       ###for ndArray

@@ -37,4 +37,4 @@ RUN chmod +x app/app.py
 EXPOSE 5000
 
 # Command to run the Flask app with Gunicorn
-CMD ["/opt/venv/bin/gunicorn", "--bind", "0.0.0.0:5000", "app.app:app", "--workers", "1", "--threads", "4"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app.app:app", "--workers", "1", "--threads", "4"]
